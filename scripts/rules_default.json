@@ -1,0 +1,36 @@
+{
+  "offers": {
+    "self_build": {"label": "Build It Yourself", "tab": "6a", "who": "Solo experts running the business mostly alone: coaches, consultants, creators, freelancers.", "angle": "Where do I begin with AI? Build a system around how you already work, and own it."},
+    "partner": {"label": "Done For You", "tab": "6b", "who": "Owners of team businesses: agencies, studios and firms with staff (roughly 2 to 50 people).", "angle": "What repeat work eats your team's week? Find it, then have the AI built for you."},
+    "either": {"label": "Discovery Call", "tab": "6c", "who": "Owners where it is unclear whether they would build it themselves or want it built.", "angle": "Build it yourself or have it built? A short call finds the work that should not need you."}
+  },
+  "weights": {
+    "owner": 3,
+    "solo_title": 2,
+    "solo_company": 2,
+    "team_or_local": 2,
+    "colleagues": 1,
+    "hot": 2,
+    "warm": 1
+  },
+  "thresholds": {
+    "colleague_count": 2,
+    "hot_days": 90,
+    "warm_days": 365,
+    "tier_a": 7,
+    "tier_b": 5
+  },
+  "lists": {
+    "strong_owner": ["founder", "co-founder", "cofounder", "founding partner", "owner", "co-owner", "ceo", "chief executive officer", "managing director", "managing partner", "proprietor", "entrepreneur", "solopreneur", "gründer", "gründerin", "mitgründer", "mitgründerin", "inhaber", "inhaberin", "geschäftsführer", "geschäftsführerin", "fondateur", "fondatrice", "co-fondateur", "cofondateur", "co-fondatrice", "gérant", "gérante", "propriétaire", "fundador", "fundadora", "cofundador", "cofundadora", "propietario", "propietaria", "dueño", "dueña", "director general", "eigenaar", "oprichter", "mede-oprichter", "titolare", "fondatore", "amministratore delegato", "vlasnik", "vlasnica", "osnivač", "osnivačica", "suosnivač", "suosnivačica", "właściciel", "założyciel", "prezes"],
+    "weak_owner": ["director", "partner", "principal", "president", "direktor", "direktorica", "socio", "socia", "directeur", "directrice", "direttore"],
+    "employee_title": ["director of", "sales director", "marketing director", "art director", "creative director", "technical director", "program director", "programme director", "project director", "associate director", "regional director", "account director", "finance director", "it director", "hr director", "operations director", "engineering director", "design director", "deputy director", "commercial director", "partner manager", "partnerships", "partner success", "channel partner", "hr business partner", "finance business partner", "talent partner", "vice president", "vp", "assistant", "account manager"],
+    "false_owner": ["product owner", "process owner", "service owner", "business process owner", "founder's associate", "founders associate", "founder associate", "founder's office", "founders office", "assistant to the ceo", "office of the ceo", "ea to ceo", "ea to the ceo", "chief of staff to the ceo", "chief of staff"],
+    "solo_expert": ["coach", "coaching", "consultant", "advisor", "adviser", "mentor", "trainer", "strategist", "fractional", "freelance", "freelancer", "creator", "content creator", "speaker", "author", "therapist", "copywriter", "ghostwriter", "facilitator", "independent", "berater", "beraterin", "trainerin", "coachin", "consultor", "consultora", "conseiller", "conseillère", "consultante", "savjetnik", "savjetnica", "konzultant", "konsultant", "trener", "mentorin", "one-person business"],
+    "solo_company_exact": ["self-employed", "self employed", "selfemployed", "freelance", "freelancer", "freelancing", "independent", "independent consultant", "selbstständig", "selbständig", "freiberuflich", "freiberufler", "autónomo", "autonomo", "indépendant", "indépendante", "zelfstandig", "libero professionista", "samostalni", "samozaposlen", "self"],
+    "team_business": ["agency", "agentur", "agence", "agencia", "agencija", "studio", "consulting", "consultancy", "firm", "marketing", "media", "digital", "creative", "solutions", "services", "group", "partners", "law", "legal", "attorney", "attorneys", "lawyer", "lawyers", "accounting", "accountants", "accountancy", "bookkeeping", "tax", "recruitment", "recruiting", "staffing", "design", "events", "logistics", "seo", "ppc", "branding", "production", "productions", "web", "development", "software house", "pr", "advertising", "ventures", "holdings"],
+    "local_traditional": ["restaurant", "hotel", "salon", "gym", "fitness", "plumbing", "plumber", "roofing", "hvac", "electrical", "electrician", "cleaning", "bakery", "cafe", "café", "shop", "store", "retail", "manufacturing", "automotive", "garage", "pharmacy", "veterinary", "vet", "physio", "physiotherapy", "chiropractic", "spa", "dental", "dentist", "clinic", "travel", "tours", "insurance", "mortgage", "architect", "architects", "architecture", "printing", "furniture", "farm", "winery", "landscaping", "construction", "real estate", "realty", "property", "properties", "interiors", "beauty", "wellness", "catering", "hospitality", "transport", "security", "e-commerce", "ecommerce", "trading", "wholesale", "import", "export"],
+    "peer": ["ai automation", "automation engineer", "automation specialist", "automation expert", "automation consultant", "automation agency", "workflow automation", "ai engineer", "ai agent", "ai agents", "ai consultant", "ai developer", "ai solutions architect", "n8n", "make.com", "zapier", "gtm engineer", "prompt engineer", "airtable", "no-code", "nocode"],
+    "exclude": ["student", "intern", "internship", "open to work", "seeking", "looking for", "job seeker", "unemployed", "retired", "graduate", "trainee", "apprentice", "aspiring", "candidate", "phd candidate"],
+    "big_company": ["google", "microsoft", "amazon", "aws", "meta", "apple", "ibm", "oracle", "deloitte", "accenture", "pwc", "kpmg", "ey", "ernst & young", "salesforce", "hubspot", "linkedin", "sap", "cisco", "intel", "nvidia", "mckinsey", "bcg", "boston consulting group", "bain", "capgemini", "infosys", "tcs", "tata consultancy services", "wipro", "cognizant", "jpmorgan", "jp morgan", "goldman sachs", "morgan stanley", "citi", "hsbc", "barclays", "unilever", "nestlé", "nestle", "siemens", "bosch", "adobe", "uber", "airbnb", "netflix", "spotify", "tesla", "samsung", "huawei", "dell", "hp", "vodafone", "deutsche telekom", "ericsson", "nokia", "philips", "shell", "coca-cola", "pepsico", "procter & gamble", "johnson & johnson", "pfizer", "ibm consulting", "booking.com", "stripe", "shopify", "atlassian"]
+  }
+}

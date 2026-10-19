@@ -1,0 +1,68 @@
+[
+ {
+  "LinkedIn URL": "https://www.linkedin.com/in/demo-lena-hartwig-01",
+  "Website Scrape": "Coaching for first-time managers in tech.\n6-session programme, 1:1 on video.\nProof: 3 named client logos, 2 testimonials.\nFree 20-minute intro call.\nTone: warm, direct, no jargon.",
+  "Email": "lena@hartwig-coaching.example",
+  "Email Status": "valid",
+  "LinkedIn DM Copy": "Hey Lena,\n\nRunning 1:1 coaching alone usually means the writing after each session lands on your evenings.\n\nWhat takes longer for you, the session notes or the follow-up to the client?",
+  "DM Follow-up 1 (Day 3-4)": "One thing I keep seeing with solo coaches: the notes and the client follow-up are the same work, written twice. Is that true for you too?",
+  "DM Follow-up 2 (Day 7-10)": "Is this worth keeping open, Lena, or should I leave it? Either answer is fine.",
+  "Cold Email Subject": "the 6-session programme [alt: sundays and session notes / first-time managers]",
+  "Cold Email Copy": "Hi Lena,\n\nI read the page about your 6-session programme for first-time managers. The part where every session ends with a written plan for the client stood out.\n\nI imagine that plan is also the thing that eats the evening after each session.\n\nI build small AI systems that turn a session recording into notes and a draft follow-up in your own words, so the writing is a 5-minute edit instead of an hour.\n\nWorth sending you the 2-minute version?\n\nSabahudin, Unstuck\n\nIf this is not relevant, reply 'no' and I will not email again.",
+  "Cold Email Follow-up 1 (Day 3)": "One idea for your case: the client plan could come out of the session automatically, already in your template. Want me to show what that looks like on one of your past sessions?",
+  "Cold Email Follow-up 2 (Day 7)": "Closing the loop here, Lena. If the timing is wrong, no reply needed, the offer stands.\n\nIf this is not relevant, reply 'no' and I will not email again.",
+  "Send Rule": "DM first, email day 3"
+ },
+ {
+  "LinkedIn URL": "https://www.linkedin.com/in/demo-owen-calloway-02",
+  "Website Scrape": "Accounts, tax and payroll for owner-managed businesses in the North West.\n14 people, Xero partner.\nClient portal for document upload.\nProof: 'Over 300 clients since 2015'.\nTone: plain, reassuring.",
+  "Email": "owen@callowayreed.example",
+  "Email Status": "valid",
+  "LinkedIn DM Copy": "Hey Owen,\n\nHiring before January tells me the busy season still lands on the team's hands.\n\nWhat eats more of their time then, the accounts or chasing clients for documents?",
+  "DM Follow-up 1 (Day 3-4)": "Asking because most small firms tell me it is the chasing, not the accounts. Is the client portal helping with that yet?",
+  "DM Follow-up 2 (Day 7-10)": "Is this worth keeping open, Owen, or should I leave it until after January?",
+  "Cold Email Subject": "january always wins [alt: the client portal / 300 clients since 2015]",
+  "Cold Email Copy": "Hi Owen,\n\nI saw on your site that clients upload documents through your portal, and that you have looked after over 300 businesses since 2015.\n\nIn firms your size, the slow part before a deadline is usually not the accounts. It is the reminders, the half-complete uploads and the phone calls to get the last receipt.\n\nI build AI that does the chasing for a team: it checks what is missing and sends the right reminder in your tone, so your people do accounts, not follow-ups.\n\nWorth a short look before January?\n\nSabahudin, Unstuck\n\nIf this is not relevant, reply 'no' and I will not email again.",
+  "Cold Email Follow-up 1 (Day 3)": "A thought for Calloway & Reed: if the portal already knows what each client sent, the missing-items list can write itself every Monday. Want the one-page version of how that works?",
+  "Cold Email Follow-up 2 (Day 7)": "Last note from me, Owen. If January is already full, no reply needed. The idea keeps.\n\nIf this is not relevant, reply 'no' and I will not email again.",
+  "Send Rule": "DM first, email day 3"
+ },
+ {
+  "LinkedIn URL": "https://www.linkedin.com/in/demo-marco-silva-14",
+  "Website Scrape": "Paid social and SEO for e-commerce brands.\n12 people, 30+ retained clients.\nMonthly performance reports in Looker Studio.\nProof: 4 case studies with revenue numbers.\nTone: confident, numbers-first.",
+  "Email": "marco@silvadigital.example",
+  "Email Status": "risky",
+  "LinkedIn DM Copy": "Hey Marco,\n\nWith 30+ retained clients, monthly reporting is probably a week of someone's month.\n\nWho builds the reports today, the account managers or one person?",
+  "DM Follow-up 1 (Day 3-4)": "Another angle: if page 1 of every report wrote itself, what would your team do with that week?",
+  "DM Follow-up 2 (Day 7-10)": "Is this worth keeping open, Marco, or should I leave it? Either answer is fine.",
+  "Cold Email Subject": "page 1 of the report [alt: 3 days of reporting / 30 retained clients]",
+  "Cold Email Copy": "Hi Marco,\n\nYour case studies lead with revenue numbers, and your site says every client gets a monthly Looker Studio report.\n\nWith 30+ retained clients, I imagine that is a lot of numbers moved by hand from ad accounts into slides each month.\n\nI build AI that pulls the numbers, writes the page-1 summary in your agency's voice and leaves your team to add the strategy.\n\nWant the 2-minute version?\n\nSabahudin, Unstuck\n\nIf this is not relevant, reply 'no' and I will not email again.",
+  "Cold Email Follow-up 1 (Day 3)": "One idea: start with the 5 clients whose reports take longest. If page 1 writes itself for them, the other 25 follow. Want me to sketch it?",
+  "Cold Email Follow-up 2 (Day 7)": "Closing the loop, Marco. No reply needed if reporting is not the priority right now.\n\nIf this is not relevant, reply 'no' and I will not email again.",
+  "Send Rule": "DM first, email day 3"
+ },
+ {
+  "LinkedIn URL": "https://www.linkedin.com/in/demo-clara-moreau-09",
+  "Website Scrape": "Stratégie et croissance pour cabinets d'architectes.\nMissions de 3 mois, solo.\nPreuves : 3 études de cas.\nAppel découverte de 30 minutes.\nTon : clair, chaleureux.",
+  "Email": "clara@claramoreau-conseil.example",
+  "Email Status": "valid",
+  "LinkedIn DM Copy": "Bonjour Clara,\n\nQuand chaque mission démarre par une nouvelle proposition, ce sont souvent les soirées qui y passent.\n\nQu'est-ce qui change le plus d'un client à l'autre : le diagnostic, ou le prix et le calendrier ?",
+  "DM Follow-up 1 (Day 3-4)": "Je pose la question parce que souvent la plus grande partie du texte reste la même. Est-ce votre cas aussi ?",
+  "DM Follow-up 2 (Day 7-10)": "Est-ce que je garde ce fil ouvert, Clara, ou je vous laisse tranquille ? Les deux réponses me vont.",
+  "Cold Email Subject": "vos missions de 3 mois [alt: la même proposition / cabinets d'architectes]",
+  "Cold Email Copy": "Bonjour Clara,\n\nJ'ai lu la page sur vos missions de 3 mois pour les cabinets d'architectes, et vos trois études de cas.\n\nJ'imagine que chaque nouvelle mission commence par une proposition écrite presque de zéro, souvent le soir.\n\nJe construis de petits systèmes d'IA qui partent de vos notes d'appel et de vos anciennes propositions pour préparer un premier jet dans votre style.\n\nVoulez-vous la version en 2 minutes ?\n\nSabahudin, Unstuck\n\nSi ce n'est pas pertinent, répondez « non » et je ne vous écrirai plus.",
+  "Cold Email Follow-up 1 (Day 3)": "Une idée pour votre cas : garder le diagnostic à la main et laisser l'IA écrire tout le reste. Voulez-vous voir un exemple ?",
+  "Cold Email Follow-up 2 (Day 7)": "Je clos ici, Clara. Pas besoin de répondre si le moment n'est pas le bon.\n\nSi ce n'est pas pertinent, répondez « non » et je ne vous écrirai plus.",
+  "Send Rule": "DM first, email day 3"
+ },
+ {
+  "LinkedIn URL": "https://www.linkedin.com/in/demo-jonas-weber-08",
+  "Website Scrape": "Steuerberatung für Selbstständige und kleine GmbHs.\n3 Personen, DATEV.\nBelege per E-Mail oder Upload.\nTon: sachlich, freundlich.",
+  "Email": "",
+  "Email Status": "not found",
+  "LinkedIn DM Copy": "Hallo Herr Weber,\n\nWenn Belege per WhatsApp, E-Mail und Papier kommen, beginnt die eigentliche Arbeit erst nach dem Sortieren.\n\nWas kostet bei Ihnen mehr Zeit: das Sortieren oder das Buchen?",
+  "DM Follow-up 1 (Day 3-4)": "Ich frage, weil kleine Kanzleien mir oft sagen, dass das Sortieren länger dauert als das Buchen. Ist das bei Ihnen auch so?",
+  "DM Follow-up 2 (Day 7-10)": "Soll ich das Thema offen lassen, Herr Weber, oder lieber ruhen lassen? Beides ist völlig in Ordnung.",
+  "Send Rule": "LinkedIn only (check consent rules)"
+ }
+]
