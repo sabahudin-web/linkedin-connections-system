@@ -1,5 +1,5 @@
 ---
-name: linkedin-connections-qualifier
+name: linkedin-connections-system
 description: Turns a LinkedIn connections export into one workbook of qualified leads with intent, website notes, verified emails, LinkedIn DMs and cold emails, ready for approval. Use when the user says "qualify my connections", "filter my LinkedIn connections", "write DMs for my connections" or "cold emails for my leads".
 ---
 
@@ -16,12 +16,10 @@ From the CSV LinkedIn gives you (name, company, headline, connected date, rarely
 | `scripts/lcs.py` | Every workbook change: init, batch, merge, split, fill, worklist, log, dashboard, export, demo |
 | `scripts/rules_default.json` | Default keyword lists (8 languages), weights, tiers and the three offers. Copy and edit for a new user |
 | `references/loot.md` | The Loot jobs, inputs, prices and what to do on a miss |
-| `references/dm-floor.md` | Step 10: the laws for message 1 and the two follow-ups, banned list, self-check |
-| `references/voice.md` | How to match the user's own voice, and the default plain-language rules |
-| `references/proof.md` | The user's own case studies and results: how to ask, when proof may be used |
-| `references/reply-engine.md` | Step 13: what to write when a lead replies |
 | `references/cold-email.md` | Step 11 rules: send rule, subject lines, body, follow-ups |
 | `references/workbook-tabs.md` | Every tab and column, and which step fills it |
+
+**Works with `linkedin-dm-writer`** (install it next to this skill). It writes every LinkedIn message in steps 10 and 13, and holds the voice and proof setup used in step 0 and in the cold email's proof line.
 
 `lcs.py` needs Python 3 and `openpyxl` (`pip3 install openpyxl`). Run it with the paths of the user's files; it never changes the raw export tab after init.
 
@@ -29,7 +27,7 @@ From the CSV LinkedIn gives you (name, company, headline, connected date, rarely
 
 ### 0. Context and offer
 1. If this runs inside Sab's repo, read `context/context.md` and `context/operating-agreement.md`, and use `rules_default.json` as is (Build It Yourself, Done For You, Discovery Call). For anyone else, ask in one message for: what they sell (one line per offer), who buys each offer, who to exclude, their country, and a spend cap for lookups. Write their answers into a copy of `rules_default.json` (`offers` labels, `who`, `angle`, plus any exclude or big-company words) and use that file with `--rules`.
-2. In the same message, ask for proof and voice: "Do you have case studies or client results I can use when a lead asks for an example?" (`references/proof.md`) and "Paste 2 or 3 messages you wrote yourself and liked" (`references/voice.md`). None is a fine answer: the copy then carries no proof line and uses the default voice.
+2. In the same message, ask for proof and voice: "Do you have case studies or client results I can use when a lead asks for an example?" and "Paste 2 or 3 messages you wrote yourself and liked" (both set up the way `linkedin-dm-writer` describes in its `references/proof.md` and `references/voice.md`). None is a fine answer: the copy then carries no proof line and uses the default voice.
 3. Ask where the export is. LinkedIn: Settings > Data privacy > Get a copy of your data > Connections. The file is `Connections.csv`.
 **Done when:** the offers, the proof list (or "none") and the voice samples (or "defaults") are written down and the CSV path is known.
 
@@ -72,10 +70,8 @@ Run `python3 scripts/lcs.py dashboard --xlsx <file>` and report: leads per offer
 **Done when:** every row in scope has an Email Status.
 
 ### 10. LinkedIn DM + 2 follow-ups
-1. Read `references/dm-floor.md` and `references/voice.md`. Inside Sab's repo, or wherever the `acquisition-linkedin-dm-sell-by-chat` skill is installed, run that skill in sheet mode instead: it is the original of this method and carries his own case studies.
-2. Skip or hold first: `SKIP: <reason>` for anyone the user's exclusions rule out, `HOLD: <reason>` for anything in `Notes & Cautions` (hardship, sensitive work, same company, already talking).
-3. **Test on 3 rows first:** write message 1 for the first 3 eligible P1 rows, show them in chat with each lead's name and the detail used, and wait for the user's yes. One bad pattern repeated 190 times is 190 bad DMs.
-4. After the yes, write `LinkedIn DM Copy`, `DM Follow-up 1 (Day 3-4)` and `DM Follow-up 2 (Day 7-10)` for every row, P1 first, in the lead's language. Run the self-check in `dm-floor.md` on each one and rebuild what fails.
+Run the `linkedin-dm-writer` skill in sheet mode (mode A) on each lead tab, using this workbook (its `references/sheet-mode.md`, "A workbook from linkedin-connections-system"). It skips and holds first, tests on 3 P1 rows and waits for the user's yes, then fills `LinkedIn DM Copy`, `DM Follow-up 1 (Day 3-4)` and `DM Follow-up 2 (Day 7-10)` for every row, in the lead's language.
+If the DM writer is not installed, say so and ask the user to install it from the same repo; do not write DMs without its rules.
 **Done when:** every row in scope has three DM cells or a SKIP or HOLD note.
 
 ### 11. Cold email + 2 follow-ups
@@ -86,11 +82,11 @@ Read `references/cold-email.md`. For every row decide `Send Rule` first. For row
 1. Put steps 8 to 11 into one JSON list keyed by `LinkedIn URL` and run `python3 scripts/lcs.py fill --xlsx <file> --json <copy.json>`. Log every paid run: `python3 scripts/lcs.py log --xlsx <file> --json <run.json>` with Run ID, Written to, Provider, Job or endpoint, Requested, Hits, Misses, Cost (USD), Notes.
 2. Re-run `dashboard` and check that the counts reconcile (leads + partners + excluded = enriched + free pass).
 3. Report in a few lines: leads per offer, emails found, DMs and emails written, total spend, anything flagged in Notes & Cautions. Leave `Approved` empty: the user marks each row before sending. For Aimfox or another sender, `python3 scripts/lcs.py export --xlsx <file> --tab 6a --csv <out.csv>`.
-4. Save the workbook as `YYYY-MM-DD-linkedin-connections.xlsx` in the user's chosen folder (in Sab's repo: `inbox/outputs/xlsx/`) and, in Sab's repo, a short run report at `inbox/outputs/md/YYYY-MM-DD-linkedin-connections-qualifier.md`.
+4. Save the workbook as `YYYY-MM-DD-linkedin-connections.xlsx` in the user's chosen folder (in Sab's repo: `inbox/outputs/xlsx/`) and, in Sab's repo, a short run report at `inbox/outputs/md/YYYY-MM-DD-linkedin-connections-system.md`.
 **Done when:** the workbook opens with no empty required cells in scope and the report is saved.
 
 ### 13. When a lead replies (any time after sending)
-Read `references/reply-engine.md`. Paste the thread in, name the stage (Talking, Problem named, Gap open, Stalled) and write ONE next message. No call ask before they have said what "fixed" looks like. Proof only from the user's list in `references/proof.md`, one item, when it is the right move. Write the reply into the chat for the user to send; never send it.
+Run `linkedin-dm-writer` in reply mode (mode C) on the pasted thread: it names the stage and writes ONE next message, with proof only when it is the right move. The user sends it; nothing is sent from here.
 **Done when:** the user has one next message and knows the stage it was written for.
 
 ## Demo mode (screen recordings)

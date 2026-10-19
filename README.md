@@ -19,10 +19,15 @@ Everything lives in one local Excel workbook, so it runs from the Claude desktop
 
 ## Install
 
-It is a Claude skill. Either:
+Two Claude skills, installed side by side:
 
-- **Claude Code:** copy this folder to `~/.claude/skills/linkedin-connections-qualifier/`.
-- **Claude desktop / claude.ai:** zip this folder and upload it under Settings → Capabilities → Skills.
+| Skill | Job |
+|---|---|
+| `skills/linkedin-connections-system` | The workflow: steps 1 to 9 and 11, the workbook, the cold emails |
+| `skills/linkedin-dm-writer` | Every LinkedIn message: the first DM, 2 follow-ups, and replies once someone answers. Also works on its own for any list or thread |
+
+- **Claude Code:** copy both folders into `~/.claude/skills/`.
+- **Claude desktop / claude.ai:** zip each folder and upload both under Settings → Capabilities → Skills.
 
 You also need Python 3 with `openpyxl` (`pip3 install openpyxl`) and, for steps 4, 7 and 8, the Loot connector in Claude with some prepaid credit. An email lookup costs under 1 cent, a website read a fraction of a cent.
 
@@ -31,7 +36,7 @@ Then tell Claude: **"qualify my connections"** and point it at your `Connections
 ## Try it without your data
 
 ```bash
-python3 scripts/lcs.py demo --out demo-linkedin-connections.xlsx
+python3 skills/linkedin-connections-system/scripts/lcs.py demo --out demo-linkedin-connections.xlsx
 ```
 
 This builds the whole workbook from 50 invented people (fictional names, `.example` domains), so you can see every tab before using your own export.
@@ -40,15 +45,17 @@ This builds the whole workbook from 50 invented people (fictional names, `.examp
 
 | File | Job |
 |---|---|
-| `SKILL.md` | The steps Claude follows |
-| `scripts/lcs.py` | Builds and updates the workbook (init, batch, merge, split, fill, worklist, log, dashboard, export, demo) |
-| `scripts/rules_default.json` | Keyword lists, weights, tiers and offers. Edit for your own offers |
-| `references/loot.md` | The Loot jobs, inputs, costs and what to do on a miss |
-| `references/dm-floor.md`, `voice.md` | Rules for the first DM and follow-ups, in your own voice |
-| `references/cold-email.md` | Send rule, subject lines, the email and 2 follow-ups |
-| `references/reply-engine.md` | What to write when someone replies |
-| `references/proof.md` | How to use your own case studies (it ships with none) |
-| `references/workbook-tabs.md` | Every tab and column |
+| `linkedin-connections-system/SKILL.md` | The steps Claude follows, end to end |
+| `linkedin-connections-system/scripts/lcs.py` | Builds and updates the workbook (init, batch, merge, split, fill, worklist, log, dashboard, export, demo) |
+| `linkedin-connections-system/scripts/rules_default.json` | Keyword lists, weights, tiers and offers. Edit for your own offers |
+| `linkedin-connections-system/references/loot.md` | The Loot jobs, inputs, costs and what to do on a miss |
+| `linkedin-connections-system/references/cold-email.md` | Send rule, subject lines, the email and 2 follow-ups |
+| `linkedin-connections-system/references/workbook-tabs.md` | Every tab and column |
+| `linkedin-dm-writer/SKILL.md` | The DM method: sheet, single message, reply and proof modes |
+| `linkedin-dm-writer/references/dm-floor.md`, `voice.md` | Rules for the first DM and follow-ups, in your own voice |
+| `linkedin-dm-writer/references/reply-engine.md` | What to write when someone replies, up to booking the call |
+| `linkedin-dm-writer/references/proof.md` | How to use your own case studies (it ships with none) |
+| `linkedin-dm-writer/scripts/sheet_rows.py` | Reads leads from a CSV and writes DMs back into one column |
 
 ## Good to know
 

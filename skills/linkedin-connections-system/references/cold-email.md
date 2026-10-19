@@ -39,7 +39,7 @@ Patterns:
 
 1. **Opening, from the website scrape.** One specific detail from their site that the DM did not use (a service, a client type, a line from their about page). Show you read it.
 2. **The bridge.** The `Pain Hypothesis` said as something you noticed is common for businesses like theirs, never as an accusation ("I imagine..." beats "You struggle with...").
-3. **One proof line, only if it is real.** One item from the user's proof list (`proof.md`), matched to their situation. No proof given means no proof line. Never invent a number or a client.
+3. **One proof line, only if it is real.** One item from the user's proof list (collected in step 0, see `linkedin-dm-writer` `references/proof.md`), matched to their situation. No proof given means no proof line. Never invent a number or a client.
 4. **Interest call to action.** One easy question that asks for interest, not for a meeting ("Worth sending you the 2-minute version?"). No calendar link in email 1.
 
 Then the sign-off and the opt-out line: "If this is not relevant, reply 'no' and I will not email again."
