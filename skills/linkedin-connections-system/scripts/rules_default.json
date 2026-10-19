@@ -1,4 +1,11 @@
 {
+  "buyer": {
+    "type": "owner",
+    "note": "owner = founders and solo experts buy (the default). role = a job title inside a company buys: set type to role, list the titles in target_titles, pick the offer key they go to in role_offer, and set exclude_big_company to false if big companies are fine.",
+    "target_titles": [],
+    "role_offer": "partner",
+    "exclude_big_company": true
+  },
   "offers": {
     "self_build": {"label": "Build It Yourself", "tab": "6a", "who": "Solo experts running the business mostly alone: coaches, consultants, creators, freelancers.", "angle": "Where do I begin with AI? Build a system around how you already work, and own it."},
     "partner": {"label": "Done For You", "tab": "6b", "who": "Owners of team businesses: agencies, studios and firms with staff (roughly 2 to 50 people).", "angle": "What repeat work eats your team's week? Find it, then have the AI built for you."},

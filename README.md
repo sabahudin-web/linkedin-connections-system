@@ -7,7 +7,7 @@ Built and run by Sabahudin Murtic (Unstuck) on his own network: 7,819 connection
 ## What it does, in 8 steps
 
 1. **Export** your connections from LinkedIn (Settings → Data privacy → Get a copy of your data → Connections).
-2. **Cheap filter:** plain keyword rules in 8 languages score every connection. No AI, no credits.
+2. **Cheap filter:** plain keyword rules in 8 languages score every connection. No AI, no credits. Before anything is scored, Claude asks what you sell, who buys it (the owner of a business, or a job title like "Head of Marketing" inside a company) and who to skip, then shows you a preview of 50 connections so you can fix the rules before scoring everyone.
 3. **Pick** the tiers worth paying for, frozen as a batch so paid data never shifts.
 4. **Enrich** the best tiers with [Loot](https://looot.ai): profile, posts from the last 30 days, company.
 5. **Qualify and brief:** a verdict, a dated quote from their own post, a hook, a pain hypothesis.
@@ -39,15 +39,21 @@ Then tell Claude: **"qualify my connections"** and point it at your `Connections
 python3 skills/linkedin-connections-system/scripts/lcs.py demo --out demo-linkedin-connections.xlsx
 ```
 
-This builds the whole workbook from 50 invented people (fictional names, `.example` domains), so you can see every tab before using your own export.
+To check your own rules on a sample first (writes nothing):
+
+```bash
+python3 skills/linkedin-connections-system/scripts/lcs.py preview --connections Connections.csv --sample 50
+```
+
+The demo builds the whole workbook from 50 invented people (fictional names, `.example` domains), so you can see every tab before using your own export.
 
 ## What is inside
 
 | File | Job |
 |---|---|
 | `linkedin-connections-system/SKILL.md` | The steps Claude follows, end to end |
-| `linkedin-connections-system/scripts/lcs.py` | Builds and updates the workbook (init, batch, merge, split, fill, worklist, log, dashboard, export, demo) |
-| `linkedin-connections-system/scripts/rules_default.json` | Keyword lists, weights, tiers and offers. Edit for your own offers |
+| `linkedin-connections-system/scripts/lcs.py` | Builds and updates the workbook (preview, init, batch, merge, split, fill, worklist, log, dashboard, export, demo) |
+| `linkedin-connections-system/scripts/rules_default.json` | Buyer type, keyword lists, weights, tiers and offers. Edit for your own offers |
 | `linkedin-connections-system/references/loot.md` | The Loot jobs, inputs, costs and what to do on a miss |
 | `linkedin-connections-system/references/cold-email.md` | Send rule, subject lines, the email and 2 follow-ups |
 | `linkedin-connections-system/references/workbook-tabs.md` | Every tab and column |

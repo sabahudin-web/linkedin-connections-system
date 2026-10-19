@@ -2,6 +2,7 @@
 """LinkedIn Connections System: one local .xlsx from raw export to written DMs and cold emails.
 
 Commands (run with python3, needs openpyxl):
+  preview   --connections Connections.csv [--rules rules.json] [--sample 50]   (score a sample, print counts, write nothing)
   init      --connections Connections.csv --out leads.xlsx [--rules rules.json] [--today YYYY-MM-DD]
   batch     --xlsx leads.xlsx --name B1 --tiers A [--offers "Build It Yourself,Done For You"] [--limit 50] [--worklist out.json]
   merge     --xlsx leads.xlsx --json enrichment.json        (rows keyed by "LinkedIn URL", fills 5 Enrichment Log)
@@ -146,6 +147,12 @@ def score_connections(rows, rules, today):
     L = {k: build_re(v) for k, v in rules["lists"].items() if k != "solo_company_exact"}
     solo_exact = set(norm(x) for x in rules["lists"]["solo_company_exact"])
     W, T, offers = rules["weights"], rules["thresholds"], rules["offers"]
+    buyer = rules.get("buyer") or {"type": "owner"}
+    role_mode = buyer.get("type") == "role"
+    target_rx = build_re(buyer.get("target_titles") or [])
+    if role_mode and not target_rx:
+        sys.exit("rules: buyer.type is 'role' but buyer.target_titles is empty. List the job titles that buy.")
+    role_offer = offers[buyer.get("role_offer", "partner")]["label"] if role_mode else None
     company_counts = {}
     for r in rows:
         c = norm(r.get("Company"))
@@ -168,7 +175,8 @@ def score_connections(rows, rules, today):
                                                   "Warm (91-365d)" if days <= T["warm_days"] else "Cold (365d+)")
         f = {
             "exclude": hit(L["exclude"], pos),
-            "big": hit(L["big_company"], comp),
+            "big": hit(L["big_company"], comp) and buyer.get("exclude_big_company", True),
+            "target": role_mode and hit(target_rx, pos),
             "peer": hit(L["peer"], both),
             "false_owner": hit(L["false_owner"], pos),
             "employee": hit(L["employee_title"], pos),
@@ -184,7 +192,7 @@ def score_connections(rows, rules, today):
         team = f["team"] or f["local"] or f["colleagues"]
         # an own-name company ("Calloway & Reed Accountants") is a solo sign only when nothing says team
         solo = f["solo_title"] or f["self_employed"] or (f["own_name"] and not team)
-        score = (W["owner"] * f["owner"] + W["solo_title"] * f["solo_title"]
+        score = (W["owner"] * (f["owner"] or f["target"]) + W["solo_title"] * f["solo_title"]
                  + W["solo_company"] * (f["self_employed"] or f["own_name"])
                  + W["team_or_local"] * (f["team"] or f["local"]) + W["colleagues"] * f["colleagues"]
                  + (W["hot"] if warmth.startswith("Hot") else W["warm"] if warmth.startswith("Warm") else 0))
@@ -196,6 +204,8 @@ def score_connections(rows, rules, today):
             group, reason = "Out", "big-company staff"
         elif f["peer"]:
             group, reason = "AI Peer", "builds AI or automation themselves"
+        elif f["target"]:
+            group, reason = role_offer, "job title the user sells to"
         elif (f["employee"] or f["false_owner"]) and not f["owner"]:
             group, reason = "Out", "employee title"
         elif f["owner"] and solo and team:
@@ -237,6 +247,26 @@ def read_linkedin_csv(path):
     if start is None:
         sys.exit("No 'First Name' header found. Is this the LinkedIn Connections.csv export?")
     return list(csv.DictReader(lines[start:]))
+
+def cmd_preview(a):
+    """Score a sample of the export with the rules, print counts and example titles per group. Writes nothing."""
+    rules = load_rules(a.rules)
+    today = datetime.strptime(a.today, "%Y-%m-%d").date() if a.today else date.today()
+    raw = read_linkedin_csv(a.connections)
+    step = max(1, len(raw) // a.sample) if a.sample else 1
+    sample = raw[::step][: a.sample] if a.sample else raw
+    scored = score_connections(sample, rules, today)
+    groups = {}
+    for s in scored:
+        groups.setdefault(s["Offer Group"], []).append(s)
+    buyer = (rules.get("buyer") or {}).get("type", "owner")
+    print(f"Rules preview: {len(scored)} of {len(raw)} connections scored, buyer type '{buyer}'. Nothing was written.\n")
+    for name, rows in sorted(groups.items(), key=lambda kv: -len(kv[1])):
+        print(f"{name}: {len(rows)} ({round(100.0 * len(rows) / max(1, len(scored)))}%)")
+        for s in rows[: a.examples]:
+            print(f"   - {s['Position'][:70]}  [{s['Reason']}]")
+    print("\nIf a buyer landed in Out or Review, change the rules before running init.")
+
 
 def cmd_init(a):
     rules = load_rules(a.rules)
@@ -600,6 +630,8 @@ def main():
     sub = p.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("init"); s.add_argument("--connections", required=True); s.add_argument("--out", required=True)
     s.add_argument("--rules"); s.add_argument("--today")
+    s = sub.add_parser("preview"); s.add_argument("--connections", required=True); s.add_argument("--rules")
+    s.add_argument("--sample", type=int, default=50); s.add_argument("--examples", type=int, default=4); s.add_argument("--today")
     s = sub.add_parser("batch"); s.add_argument("--xlsx", required=True); s.add_argument("--name", required=True)
     s.add_argument("--tiers", default="A"); s.add_argument("--offers"); s.add_argument("--limit", type=int)
     s.add_argument("--worklist")
@@ -613,7 +645,7 @@ def main():
     s.add_argument("--csv", required=True)
     s = sub.add_parser("demo"); s.add_argument("--out", required=True)
     a = p.parse_args()
-    {"init": cmd_init, "batch": cmd_batch, "merge": cmd_merge, "split": cmd_split, "fill": cmd_fill,
+    {"preview": cmd_preview, "init": cmd_init, "batch": cmd_batch, "merge": cmd_merge, "split": cmd_split, "fill": cmd_fill,
      "worklist": cmd_worklist, "log": cmd_log, "dashboard": cmd_dashboard, "export": cmd_export,
      "demo": cmd_demo}[a.cmd](a)
 
